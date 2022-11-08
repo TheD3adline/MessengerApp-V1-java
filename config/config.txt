@@ -1,4 +1,4 @@
-Michael:passMichael:Moritz,Philipp
-Moritz:passMoritz:Michael,Philip
-Philipp:passPhilipp:Michael,Moritz
-Jochen:passJochen:
+Michael:passMichael:Moritz,Philipp,;
+Moritz:passMoritz:Michael,Philip,;
+Philipp:passPhilipp:Michael,Moritz,;
+Jochen:passJochen:NONE,;

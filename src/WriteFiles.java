@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +35,29 @@ public class WriteFiles {
             return true;
         } catch(IOException e) {
             System.out.println("An error occurred during file content deletion.");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Creates the output file at the specified
+     * @param path , and
+     * @return boolean true if file created or
+     * false when it already exists.
+     */
+    public static boolean createFile(String path) {
+        try {
+            File emailList = new File(path);
+            if(emailList.createNewFile()) {
+                System.out.println("Output file created: " + emailList.getName());
+                return true;
+            } else {
+                System.out.println("Output file already exists");
+                return false;
+            }
+        } catch(IOException e) {
+            System.out.println("Exception occurred");
             e.printStackTrace();
         }
         return false;

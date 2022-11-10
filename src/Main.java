@@ -17,12 +17,21 @@ public class Main {
     static ArrayList<String> userPassList = new ArrayList<>();
     static ArrayList<String> userRawContactsList = new ArrayList<>();
     static ArrayList<User> users = new ArrayList<>();
-
+    static User activeUser = null;
+    static User activeRecipient = null;
     static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-        UserInterface.printUI();
+        UserInterface.printMainUI();
+
+        UserInterface.printLoginUI();
+
+        UserInterface.printUserUI();
+
+        UserInterface.printNewMSGUI();
+
+        UserInterface.printInboxMenu();
 
         getUserData();
         loadUserData();
@@ -68,5 +77,9 @@ public class Main {
             contacts = contacts.substring(contacts.indexOf(',') + 1);
         }
         return data;
+    }
+
+    public static void writeMessage() {
+        new Message(activeUser, activeRecipient, sc.next());
     }
 }

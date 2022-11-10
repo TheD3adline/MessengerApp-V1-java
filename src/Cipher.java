@@ -6,7 +6,7 @@ public class Cipher {
 
         MSG = MSG.toLowerCase();
 
-        String encodedMSG = "";
+        StringBuilder encodedMSG = new StringBuilder();
 
         for(int i = 0; i < MSG.length(); i++) {
 
@@ -16,17 +16,17 @@ public class Cipher {
 
             char rep = alphabet.charAt(key);
 
-            encodedMSG += rep;
+            encodedMSG.append(rep);
         }
 
-        return encodedMSG;
+        return encodedMSG.toString();
     }
 
     public static String decipherMessage(String MSG, int offset) {
 
         MSG = MSG.toLowerCase();
 
-        String decodedMSG = "";
+        StringBuilder decodedMSG = new StringBuilder();
 
         for(int i = 0; i < MSG.length(); i++) {
 
@@ -37,12 +37,11 @@ public class Cipher {
             if(key < 0)
                 key = alphabet.length() + key;
 
-
             char rep = alphabet.charAt(key);
 
-            decodedMSG += rep;
+            decodedMSG.append(rep);
         }
 
-        return decodedMSG;
+        return decodedMSG.toString();
     }
 }

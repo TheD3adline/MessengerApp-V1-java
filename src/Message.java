@@ -25,6 +25,7 @@ public class Message {
         if(ReadFiles.getFileInfo(msgFile)) {
             this.message = Cipher.decipherMessage(ReadFiles.readFileToString(msgFile), 4);
             System.out.println(message);
+            //WriteFiles.deleteFile(path);
         }
     }
 }

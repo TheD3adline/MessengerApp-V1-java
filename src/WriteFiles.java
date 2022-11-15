@@ -62,13 +62,16 @@ public class WriteFiles {
         return false;
     }
 
-    public static void deleteFile(String path) {
+    public static boolean deleteFile(String path) {
         try {
             File f = new File(path);
-            f.delete();
-
+            if(f.delete()) {
+                return true;
+            }
         } catch(Exception e) {
             System.out.println("Exception occurred during file deletion.");
+            return false;
         }
+        return false;
     }
 }

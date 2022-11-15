@@ -10,15 +10,19 @@ public class Cipher {
 
         for(int i = 0; i < MSG.length(); i++) {
 
-            int charPos = alphabet.indexOf(MSG.charAt(i));
+            if((MSG.charAt(i) >= 97) && (MSG.charAt(i) <= 122)) {
+                int charPos = alphabet.indexOf(MSG.charAt(i));
 
-            int key = (offset + charPos) % 26;
+                int key = (offset + charPos) % 26;
 
-            char rep = alphabet.charAt(key);
+                char rep = alphabet.charAt(key);
 
-            encodedMSG.append(rep);
+                encodedMSG.append(rep);
+            } else if(Character.isWhitespace(MSG.charAt(i)))
+                encodedMSG.append(" ");
+            else
+                encodedMSG.append(MSG.charAt(i));
         }
-
         return encodedMSG.toString();
     }
 
@@ -30,18 +34,22 @@ public class Cipher {
 
         for(int i = 0; i < MSG.length(); i++) {
 
-            int charPos = alphabet.indexOf(MSG.charAt(i));
+            if((MSG.charAt(i) >= 97) && (MSG.charAt(i) <= 122)) {
+                int charPos = alphabet.indexOf(MSG.charAt(i));
 
-            int key = (charPos - offset) % 26;
+                int key = (charPos - offset) % 26;
 
-            if(key < 0)
-                key = alphabet.length() + key;
+                if(key < 0)
+                    key = alphabet.length() + key;
 
-            char rep = alphabet.charAt(key);
+                char rep = alphabet.charAt(key);
 
-            decodedMSG.append(rep);
+                decodedMSG.append(rep);
+            } else if(Character.isWhitespace(MSG.charAt(i)))
+                decodedMSG.append(" ");
+            else
+                decodedMSG.append(MSG.charAt(i));
         }
-
         return decodedMSG.toString();
     }
 }

@@ -1,26 +1,26 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class WriteFiles {
 
     /**
-     * Takes data from given ArrayList and writes it to file specified by path
+     * Takes data from given String and writes it to file specified by path
      * @param path the path to the file
-     * @param data the given ArrayList
+     * @param msg the given String
+     * @return boolean true if message was successfully written to file
      */
-    public static void writeDataToFile(String path, ArrayList<String> data) {
+    public static boolean writeDataToFile(String path, String msg) {
         try {
-            FileWriter txtWriter = new FileWriter(path);
-            for(String str : data) {
-                txtWriter.write(str);
-            }
-            txtWriter.flush();
-            txtWriter.close();
+            FileWriter msgWriter = new FileWriter(path);
+            msgWriter.write(msg);
+            msgWriter.flush();
+            msgWriter.close();
+            return true;
         } catch(IOException e) {
             System.out.println("An error occurred during file writing.");
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -48,18 +48,27 @@ public class WriteFiles {
      */
     public static boolean createFile(String path) {
         try {
-            File emailList = new File(path);
-            if(emailList.createNewFile()) {
-                System.out.println("Output file created: " + emailList.getName());
+            File message = new File(path);
+            if(message.createNewFile()) {
                 return true;
             } else {
-                System.out.println("Output file already exists");
+                System.out.println("An Error occurred during file creation.");
                 return false;
             }
         } catch(IOException e) {
-            System.out.println("Exception occurred");
+            System.out.println("IOException occurred during file creation.");
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void deleteFile(String path) {
+        try {
+            File f = new File(path);
+            f.delete();
+
+        } catch(Exception e) {
+            System.out.println("Exception occurred during file deletion.");
+        }
     }
 }

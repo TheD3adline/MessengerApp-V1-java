@@ -36,15 +36,13 @@ public class Main {
         getUserData();
         loadUserData();
 
-        for(int i = 0; i < userNamesList.size(); i++)
-            System.out.println(users.get(i).getUserName() + " " + users.get(i).getUserPass() + " " + users.get(i).getContactList());
+        activeUser = users.get(0);
+        activeRecipient = users.get(1);
 
-        System.out.println(users.get(0).getContactList().get(0));
-        System.out.println(users.get(3).getContactList().get(0));
+        writeMessage();
 
-        System.out.println(Cipher.cipherMessage(sc.next(), 4));
+        readMessage("cache\\mailMORITZ.txt");
 
-        System.out.println(Cipher.decipherMessage(sc.next(), 4));
     }
 
     public static void getUserData() {
@@ -80,6 +78,13 @@ public class Main {
     }
 
     public static void writeMessage() {
+        System.out.print("Enter your message: ");
         new Message(activeUser, activeRecipient, sc.next());
+    }
+
+    public static void readMessage(String path) {
+        System.out.println("Select message to read: ");
+        new Message(path);
+
     }
 }

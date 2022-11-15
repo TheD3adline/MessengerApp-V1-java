@@ -43,4 +43,28 @@ public class ReadFiles {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Returns the contents of the given file as String
+     * @param currentFile given file
+     * @return imported data as String
+     */
+    public static String readFileToString(File currentFile) {
+        try {
+            Scanner scanner = new Scanner(currentFile);
+            // Read Data String
+            String msg = scanner.nextLine();
+            // Edit Data String
+            msg = msg.replace("\\","");
+            msg = msg.replace("}", "");
+            msg = msg.replace("\n", "");
+            scanner.close();
+            // Return cleaned String
+            return msg;
+        } catch(FileNotFoundException e) {
+            System.out.println("An error occurred during file reading.");
+            e.printStackTrace();
+        }
+        return "";
+    }
 }

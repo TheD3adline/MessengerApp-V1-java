@@ -32,7 +32,7 @@ public class Main {
         UserInterface.printMainUI();
         UserInterface.welcomeNote();
         while(true) {
-            switch(UserInput.getMenuInput(3)) {
+            switch(UserInput.getMenuInput()) {
                     case 1:
                         System.out.println("PLACEHOLDER"); break;
                     case 2:
@@ -62,8 +62,8 @@ public class Main {
                         if(user.getUserName().equals(uName) && user.getUserPass().equals(uPass)) {
                             activeUser = user;
                             UserInterface.correctUserData();
-
-                            break;
+                            UserInterface.printUserUI();
+                            return;
                         }
                     }
                     UserInterface.incorrectUserData();
@@ -75,7 +75,7 @@ public class Main {
     public static void userMenu() {
         UserInterface.printUserUI();
         while(true) {
-            switch(UserInput.getMenuInput(4)) {
+            switch(UserInput.getMenuInput()) {
                 case 1:
                     System.out.println("1"); break;
                 case 2:

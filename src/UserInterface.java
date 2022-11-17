@@ -93,7 +93,7 @@ public class UserInterface {
     }
 
     public static void correctUserData() {
-        System.out.print("\nLogin Successful. Welcome back " + Main.activeUser.getUserName() + " !");
+        System.out.print("\nLogin Successful. Welcome back " + Main.activeUser.getUserName() + " !\n");
     }
 
     public static void newMSG() {

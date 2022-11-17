@@ -3,23 +3,19 @@ public class UserInput {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static int getMenuInput(int menuPoints) {
+    public static int getMenuInput() {
         int num;
-        StringBuilder listInputPoints = new StringBuilder();
-        for(int i = 0; i < menuPoints; i++) {
-            listInputPoints.append(" ").append(i + 1).append(",");
-        }
         do {
-            System.out.print("\nPlease select menu point! (Input" + listInputPoints + "): ");
+            System.out.print("\nPlease select menu point! (Input 1, 2, or 3): ");
             while(!sc.hasNextInt()) {
                 sc.next();
                 System.out.println("Invalid input!");
-                System.out.print("\nPlease select menu point! (Input" + listInputPoints + "): ");
+                System.out.print("\nPlease select menu point! (Input 1, 2, or 3): ");
             }
             num = sc.nextInt();
-            if(num < 1 || num > menuPoints)
+            if(num < 1 || num > 3)
                 System.out.println("Invalid input!");
-        } while(num < 1 || num > menuPoints);
+        } while(num < 1 || num > 3);
         return num;
     }
 

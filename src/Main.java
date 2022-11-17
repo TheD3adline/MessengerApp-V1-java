@@ -55,14 +55,15 @@ public class Main {
             else {
                 UserInterface.passPrompt();
                 String uPass = UserInput.getUserDataInput();
-                if(uPass.charAt(0) == '3' && uPass.length() == 1)
+                if(uPass.charAt(0) == '3' && uPass.length() == 1) {
+                    UserInterface.printMainUI();
                     return;
-                else {
+                } else {
                     for(User user : users) {
                         if(user.getUserName().equals(uName) && user.getUserPass().equals(uPass)) {
                             activeUser = user;
                             UserInterface.correctUserData();
-                            UserInterface.printUserUI();
+                            userMenu();
                             return;
                         }
                     }
@@ -77,13 +78,27 @@ public class Main {
         while(true) {
             switch(UserInput.getMenuInput()) {
                 case 1:
+                    newMSGMenu(); break;
+                case 2:
+                    System.out.println("2"); break;
+                case 3:
+                    UserInterface.printMainUI(); return;
+                default:
+                    System.out.println("UI Error!");
+            }
+        }
+    }
+
+    public static void newMSGMenu() {
+        UserInterface.printNewMSGUI();
+        while(true) {
+            switch(UserInput.getMenuInput()) {
+                case 1:
                     System.out.println("1"); break;
                 case 2:
                     System.out.println("2"); break;
                 case 3:
-                    System.out.println("3"); break;
-                case 4:
-                    System.out.println("4"); break;
+                    UserInterface.printUserUI(); return;
                 default:
                     System.out.println("UI Error!");
             }

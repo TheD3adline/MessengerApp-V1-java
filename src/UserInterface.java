@@ -1,5 +1,6 @@
 public class UserInterface {
 
+    private static final String mainUIMenu = "Main Menu";
     private static final String registerUIComp = "1.) Register User (PH)";
     private static final String loginUIComp = "2.) Login";
     private static final String endUIComp = "3.) Exit Program";
@@ -19,10 +20,10 @@ public class UserInterface {
     public static void printMainUI() {
         System.out.println("-".repeat(40));
         System.out.println("|" + " ".repeat(38) + "|");
+        System.out.println("|" + " ".repeat(4) + mainUIMenu + " ".repeat((34 - mainUIMenu.length())) + "|");
         System.out.println("|" + " ".repeat(4) + registerUIComp + " ".repeat((34 - registerUIComp.length())) + "|");
         System.out.println("|" + " ".repeat(4) + loginUIComp + " ".repeat((34 - loginUIComp.length())) + "|");
         System.out.println("|" + " ".repeat(4) + endUIComp + " ".repeat((34 - endUIComp.length())) + "|");
-        System.out.println("|" + " ".repeat(38) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.print("-".repeat(40));
     }
@@ -32,8 +33,8 @@ public class UserInterface {
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.println("|" + " ".repeat(4) + loginUI + " ".repeat((34 - loginUI.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("|" + " ".repeat(4) + backToMenu + " ".repeat((34 - backToMenu.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
+        System.out.println("|" + " ".repeat(4) + backToMenu + " ".repeat((34 - backToMenu.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.print("-".repeat(40));
     }
@@ -65,15 +66,15 @@ public class UserInterface {
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.println("|" + " ".repeat(4) + inboxUI + " ".repeat((34 - inboxUI.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("|" + " ".repeat(4) + backToUserMenuX + " ".repeat((34 - backToUserMenuX.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
+        System.out.println("|" + " ".repeat(4) + backToUserMenuX + " ".repeat((34 - backToUserMenuX.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.print("-".repeat(40));
     }
 
 
     public static void welcomeNote() {
-        System.out.print("\nWelcome to the Julius Caesar Messenger App (or short JCM)!");
+        System.out.println("\nWelcome to the Julius Caesar Messenger App (or short JCM)!");
     }
 
     public static void exitNote() {

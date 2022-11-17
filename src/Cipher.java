@@ -18,9 +18,7 @@ public class Cipher {
                 char rep = alphabet.charAt(key);
 
                 encodedMSG.append(rep);
-            } else if(Character.isWhitespace(MSG.charAt(i)))
-                encodedMSG.append(" ");
-            else
+            } else
                 encodedMSG.append(MSG.charAt(i));
         }
         return encodedMSG.toString();
@@ -45,9 +43,7 @@ public class Cipher {
                 char rep = alphabet.charAt(key);
 
                 decodedMSG.append(rep);
-            } else if(Character.isWhitespace(MSG.charAt(i)))
-                decodedMSG.append(" ");
-            else
+            } else
                 decodedMSG.append(MSG.charAt(i));
         }
         return decodedMSG.toString();

@@ -23,26 +23,71 @@ public class Main {
 
     public static void main(String[] args) {
 
-        UserInterface.printMainUI();
 
-        UserInterface.printLoginUI();
-
-        UserInterface.printUserUI();
-
-        UserInterface.printNewMSGUI();
-
-        UserInterface.printInboxMenu();
 
         getUserData();
         loadUserData();
 
-        activeUser = users.get(0);
-        activeRecipient = users.get(1);
 
-        writeMessage();
+        UserInterface.printMainUI();
+        UserInterface.welcomeNote();
+        while(true) {
+            switch(UserInput.getMenuInput(3)) {
+                    case 1:
+                        System.out.println("PLACEHOLDER"); break;
+                    case 2:
+                        loginMenu(); break;
+                    case 3:
+                        UserInterface.exitNote(); System.exit(0); break;
+                    default:
+                        System.out.println("UI Error!");
+            }
+        }
+    }
 
-        readMessage("cache\\mailMORITZ.txt");
+    public static void loginMenu() {
+        UserInterface.printLoginUI();
+        while(true) {
+            UserInterface.loginPrompt();
+            String uName = UserInput.getUserDataInput();
+            if(uName.charAt(0) == '3' && uName.length() == 1)
+                return;
+            else {
+                UserInterface.passPrompt();
+                String uPass = UserInput.getUserDataInput();
+                if(uPass.charAt(0) == '3' && uPass.length() == 1)
+                    return;
+                else {
+                    for(User user : users) {
+                        if(user.getUserName().equals(uName) && user.getUserPass().equals(uPass)) {
+                            activeUser = user;
+                            UserInterface.correctUserData();
 
+                            break;
+                        }
+                    }
+                    UserInterface.incorrectUserData();
+                }
+            }
+        }
+    }
+
+    public static void userMenu() {
+        UserInterface.printUserUI();
+        while(true) {
+            switch(UserInput.getMenuInput(4)) {
+                case 1:
+                    System.out.println("1"); break;
+                case 2:
+                    System.out.println("2"); break;
+                case 3:
+                    System.out.println("3"); break;
+                case 4:
+                    System.out.println("4"); break;
+                default:
+                    System.out.println("UI Error!");
+            }
+        }
     }
 
     public static void getUserData() {
@@ -79,7 +124,7 @@ public class Main {
 
     public static void writeMessage() {
         System.out.print("Enter your message: ");
-        new Message(activeUser, activeRecipient, sc.next());
+        new Message(activeUser, activeRecipient, sc.nextLine());
     }
 
     public static void readMessage(String path) {

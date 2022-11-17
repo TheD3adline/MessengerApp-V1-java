@@ -24,7 +24,7 @@ public class UserInterface {
         System.out.println("|" + " ".repeat(4) + endUIComp + " ".repeat((34 - endUIComp.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("-".repeat(40));
+        System.out.print("-".repeat(40));
     }
 
     public static void printLoginUI() {
@@ -35,7 +35,7 @@ public class UserInterface {
         System.out.println("|" + " ".repeat(4) + backToMenu + " ".repeat((34 - backToMenu.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("-".repeat(40));
+        System.out.print("-".repeat(40));
     }
 
     public static void printUserUI() {
@@ -46,7 +46,7 @@ public class UserInterface {
         System.out.println("|" + " ".repeat(4) + inboxPoint + " ".repeat((34 - inboxPoint.length())) + "|");
         System.out.println("|" + " ".repeat(4) + logoutPoint + " ".repeat((34 - logoutPoint.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("-".repeat(40));
+        System.out.print("-".repeat(40));
     }
 
     public static void printNewMSGUI() {
@@ -57,7 +57,7 @@ public class UserInterface {
         System.out.println("|" + " ".repeat(4) + selectRecipientPoint + " ".repeat((34 - selectRecipientPoint.length())) + "|");
         System.out.println("|" + " ".repeat(4) + backToUserMenu + " ".repeat((34 - backToUserMenu.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("-".repeat(40));
+        System.out.print("-".repeat(40));
     }
 
     public static void printInboxMenu() {
@@ -68,15 +68,16 @@ public class UserInterface {
         System.out.println("|" + " ".repeat(4) + backToUserMenuX + " ".repeat((34 - backToUserMenuX.length())) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("-".repeat(40));
+        System.out.print("-".repeat(40));
     }
 
 
-    public static void welcomePrompt() {
+    public static void welcomeNote() {
         System.out.print("\nWelcome to the Julius Caesar Messenger App (or short JCM)!");
     }
-    public static void menuPrompt() {
-        System.out.print("\nPlease select menu point! (Input 1, 2, or 3): ");
+
+    public static void exitNote() {
+        System.out.print("\nExiting program.");
     }
 
     public static void loginPrompt() {

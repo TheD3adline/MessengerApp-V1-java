@@ -11,7 +11,7 @@ public class UserInterface {
     private static final String inboxPoint = "2.) Inbox";
     private static final String logoutPoint = "3.) Logout";
     private static final String writeMSGUI = "New Message Menu";
-    private static final String newContactPoint = "1.) Enter new Contact";
+    private static final String newContactPoint = "1.) Enter new Contact (PH)";
     private static final String selectRecipientPoint = "2.) Select Recipient";
     private static final String backToUserMenu = "3.) Back to User Menu";
     private static final String backToUserMenuX = "X.) Back to User Menu";
@@ -110,7 +110,9 @@ public class UserInterface {
     }
 
     public static void selectRecipient() {
-        //method to print contact list
+        for(int i = 0; i < Main.activeUser.getContactList().size(); i++) {
+            System.out.println((i + 1) + ".)" + Main.activeUser.getContactList().get(i));
+        }
     }
 
     public static void enterMSG() {

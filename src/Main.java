@@ -94,9 +94,9 @@ public class Main {
         while(true) {
             switch(UserInput.getMenuInput()) {
                 case 1:
-                    System.out.println("1"); break;
+                    System.out.println("Create New Contact PLACEHOLDER"); break;
                 case 2:
-                    System.out.println("2"); break;
+                    UserInterface.selectRecipient(); break;
                 case 3:
                     UserInterface.printUserUI(); return;
                 default:

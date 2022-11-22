@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    static File userData = new File("config\\config.txt");
+    static final File userData = new File("config\\config.txt");
+    static final File cacheFolder = new File("cache\\");
     static ArrayList<String> rawUserList = new ArrayList<>();
     static ArrayList<String> userNamesList = new ArrayList<>();
     static ArrayList<String> userPassList = new ArrayList<>();
@@ -80,9 +81,12 @@ public class Main {
                 case 1:
                     newMSGMenu(); break;
                 case 2:
-                    System.out.println("2"); break;
+                    UserInterface.selectMSG();
+                    break;
                 case 3:
-                    UserInterface.printMainUI(); return;
+                    UserInterface.printMainUI();
+                    activeUser = null;
+                    return;
                 default:
                     System.out.println("UI Error!");
             }
@@ -96,7 +100,19 @@ public class Main {
                 case 1:
                     System.out.println("Create New Contact PLACEHOLDER"); break;
                 case 2:
-                    UserInterface.selectRecipient(); break;
+                    UserInterface.selectRecipient();
+                    String selector = activeUser.getContactList().get(UserInput.getContactSelection(activeUser.getContactList()));
+                    for(int i = 0; i < users.size(); i++) {
+                        if(selector.equals(users.get(i).getUserName())) {
+                            activeRecipient = users.get(i);
+                            break;
+                        } else if(i == (users.size() - 1)) {
+                            System.out.println("Error, Contact could not be found!");
+                        }
+                    }
+                    writeMessage();
+                    activeRecipient = null;
+                    break;
                 case 3:
                     UserInterface.printUserUI(); return;
                 default:
@@ -145,6 +161,5 @@ public class Main {
     public static void readMessage(String path) {
         System.out.println("Select message to read: ");
         new Message(path);
-
     }
 }

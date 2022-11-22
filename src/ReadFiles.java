@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ReadFiles {
@@ -66,5 +67,17 @@ public class ReadFiles {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static void listFilesFromFolder(File folder) {
+        int i = 0;
+        for(File fileEntry : Objects.requireNonNull(folder.listFiles())) {
+            if(fileEntry.isDirectory()) {
+                listFilesFromFolder(fileEntry);
+            } else {
+                i++;
+                System.out.println(i + ".) " + fileEntry);
+            }
+        }
     }
 }

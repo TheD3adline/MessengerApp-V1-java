@@ -11,7 +11,7 @@ public class UserInterface {
     private static final String inboxPoint = "2.) Inbox";
     private static final String logoutPoint = "3.) Logout";
     private static final String writeMSGUI = "New Message Menu";
-    private static final String newContactPoint = "1.) Enter new Contact (PH)";
+    private static final String newContactPoint = "1.) Create new Contact (PH)";
     private static final String selectRecipientPoint = "2.) Select Recipient";
     private static final String backToUserMenu = "3.) Back to User Menu";
     private static final String backToUserMenuX = "X.) Back to User Menu";
@@ -125,6 +125,6 @@ public class UserInterface {
     }
 
     public static void selectMSG() {
-        //method to print all unread messages
+        ReadFiles.listFilesFromFolder(Main.cacheFolder);
     }
 }

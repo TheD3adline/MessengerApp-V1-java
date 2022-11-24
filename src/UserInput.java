@@ -1,3 +1,11 @@
+/*
+    Author: Michael Fessler
+    Date: 2022/11/8
+    Version: 0.1
+    Description:
+            Methods for the different types of user inputs with validity verification and loops.
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInput {
@@ -20,7 +28,7 @@ public class UserInput {
         return num;
     }
 
-    public static String getUserDataInput() {
+    public static String getStringInput() {
         return sc.next();
     }
 
@@ -40,11 +48,11 @@ public class UserInput {
         return num - 1;
     }
 
-    public static char getListInput(char input) {
-        if(Character.toLowerCase(input) == 'x') {
+    public static char getListInput(String input) {
+        if(Character.toLowerCase(input.charAt(0)) == 'x') {
             return 'x';
-        } else {
-            int num;
+        } else if(Character.isDigit(input.charAt(0))) {
+            return input.charAt(0);
         }
         return ' ';
     }

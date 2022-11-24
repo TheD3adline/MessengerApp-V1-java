@@ -1,3 +1,11 @@
+/*
+    Author: Michael Fessler
+    Date: 2022/11/8
+    Version: 0.1
+    Description:
+            The cipher to encode and decode the messages.
+ */
+
 public class Cipher {
 
     private static final String alphabet = "abcdefghijklmnopqrstuvwxyz";

@@ -1,3 +1,13 @@
+/*
+    Author: Michael Fessler
+    Date: 2022/11/8
+    Version: 0.1
+    Description:
+            Class to store the UI print to console data.
+ */
+
+import java.util.ArrayList;
+
 public class UserInterface {
 
     private static final String mainUIMenu = "Main Menu";
@@ -124,7 +134,14 @@ public class UserInterface {
         //to Message.recipient.getUserName()
     }
 
-    public static void selectMSG() {
-        ReadFiles.listFilesFromFolder(Main.cacheFolder);
+    public static ArrayList<String> selectMSG() {
+        System.out.println("\nPlease select message or x to return! (Input 1, 2, 3, 4 etc., or x): ");
+        ArrayList<String> inboxList;
+        inboxList = ReadFiles.listFilesFromFolder(Main.cacheFolder);
+        for(int i = 0; i < inboxList.size(); i++) {
+            inboxList.set(i, inboxList.get(i).replace("cache\\", (i + 1) + ".) "));
+            System.out.println(inboxList.get(i));
+        }
+        return inboxList;
     }
 }

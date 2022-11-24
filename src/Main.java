@@ -50,12 +50,12 @@ public class Main {
         UserInterface.printLoginUI();
         while(true) {
             UserInterface.loginPrompt();
-            String uName = UserInput.getUserDataInput();
+            String uName = UserInput.getStringInput();
             if(uName.charAt(0) == '3' && uName.length() == 1)
                 return;
             else {
                 UserInterface.passPrompt();
-                String uPass = UserInput.getUserDataInput();
+                String uPass = UserInput.getStringInput();
                 if(uPass.charAt(0) == '3' && uPass.length() == 1) {
                     UserInterface.printMainUI();
                     return;
@@ -81,7 +81,12 @@ public class Main {
                 case 1:
                     newMSGMenu(); break;
                 case 2:
-                    UserInterface.selectMSG();
+                    ArrayList<String> inboxList = UserInterface.selectMSG();
+                    StringBuilder path = new StringBuilder(inboxList.get(UserInput.getContactSelection(inboxList)));
+                    for(int i = 0; i < 4; i++) {
+                        path.deleteCharAt(0);
+                    }
+                    readMessage("cache\\" + path);
                     break;
                 case 3:
                     UserInterface.printMainUI();
@@ -105,12 +110,13 @@ public class Main {
                     for(int i = 0; i < users.size(); i++) {
                         if(selector.equals(users.get(i).getUserName())) {
                             activeRecipient = users.get(i);
+                            writeMessage();
                             break;
-                        } else if(i == (users.size() - 1)) {
+                        }
+                        if(i == (users.size() - 1)) {
                             System.out.println("Error, Contact could not be found!");
                         }
                     }
-                    writeMessage();
                     activeRecipient = null;
                     break;
                 case 3:
@@ -121,11 +127,18 @@ public class Main {
         }
     }
 
+    /**
+     * Calls ReadFiles.getFileInfo() and ReadFiles.saveToContainer()
+     * to load the raw user data saved in config\config.txt into the program.
+     */
     public static void getUserData() {
         if(ReadFiles.getFileInfo(userData))
             ReadFiles.saveToContainer(userData, rawUserList);
     }
 
+    /**
+     * Splices the user data stored in rawUserList into userNamesList, userPassList, and userRawContactsList.
+     */
     public static void loadUserData() {
         for(int i = 0; i < rawUserList.size(); i++) {
             spliceUserData(userNamesList, i);
@@ -139,11 +152,21 @@ public class Main {
 
     }
 
+    /**
+     * The sub-method to splice rawUserList.
+     * @param list given list to add spliced data.
+     * @param index given working index from for loop in higher-method, loadUserData().
+     */
     public static void spliceUserData(ArrayList<String> list, int index) {
         list.add(rawUserList.get(index).substring(0, rawUserList.get(index).indexOf(':')));
         rawUserList.set(index, rawUserList.get(index).substring(rawUserList.get(index).indexOf(':') + 1));
     }
 
+    /**
+     * Splices the contact data of the users from the given Strings.
+     * @param contacts given String.
+     * @return ArrayList that stores contact data for each user individually.
+     */
     public static ArrayList<String> makeContactList(String contacts) {
         ArrayList<String> data = new ArrayList<>();
         while(contacts.charAt(0) != ';') {
@@ -153,13 +176,20 @@ public class Main {
         return data;
     }
 
+    /**
+     * Instantiates a new message with all the relevant data, sender, recipient, and a query for the actual message.
+     */
     public static void writeMessage() {
         System.out.print("Enter your message: ");
         new Message(activeUser, activeRecipient, sc.nextLine());
     }
 
+    /**
+     * Instantiates message to be read from specified path.
+     * @param path the specified path to where the message file is stored.
+     */
     public static void readMessage(String path) {
         System.out.println("Select message to read: ");
-        new Message(path);
+        new Message(path, 4);
     }
 }

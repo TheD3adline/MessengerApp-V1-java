@@ -1,3 +1,11 @@
+/*
+    Author: Michael Fessler
+    Date: 2022/11/8
+    Version: 0.1
+    Description:
+            Class for the file writing operations.
+ */
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

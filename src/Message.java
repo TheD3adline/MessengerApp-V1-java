@@ -1,3 +1,11 @@
+/*
+    Author: Michael Fessler
+    Date: 2022/11/8
+    Version: 0.1
+    Description:
+            Stores and feeds the message data through the cipher, and also to decipher them again.
+ */
+
 import java.io.File;
 
 public class Message {
@@ -20,10 +28,10 @@ public class Message {
         }
     }
 
-    public Message(String path) {
+    public Message(String path, int cipher) {
         File msgFile = new File(path);
         if(ReadFiles.getFileInfo(msgFile)) {
-            this.message = Cipher.decipherMessage(ReadFiles.readFileToString(msgFile), 4);
+            this.message = Cipher.decipherMessage(ReadFiles.readFileToString(msgFile), cipher);
             System.out.println(message);
             //WriteFiles.deleteFile(path);
         }

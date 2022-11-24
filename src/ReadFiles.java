@@ -1,3 +1,11 @@
+/*
+    Author: Michael Fessler
+    Date: 2022/11/8
+    Version: 0.1
+    Description:
+            CLass for the file reading operations.
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -69,15 +77,15 @@ public class ReadFiles {
         return "";
     }
 
-    public static void listFilesFromFolder(File folder) {
-        int i = 0;
+    public static ArrayList<String> listFilesFromFolder(File folder) {
+        ArrayList<String> r = new ArrayList<>();
         for(File fileEntry : Objects.requireNonNull(folder.listFiles())) {
             if(fileEntry.isDirectory()) {
                 listFilesFromFolder(fileEntry);
             } else {
-                i++;
-                System.out.println(i + ".) " + fileEntry);
+                r.add(String.valueOf(fileEntry));
             }
         }
+        return r;
     }
 }

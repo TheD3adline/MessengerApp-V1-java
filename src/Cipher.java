@@ -9,23 +9,36 @@
 public class Cipher {
 
     private static final String alphabet = "abcdefghijklmnopqrstuvwxyz";
+    private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static String cipherMessage(String MSG, int offset) {
 
-        MSG = MSG.toLowerCase();
+        MSG = MSG.replace("[", "(");
+        MSG = MSG.replace("]", ")");
 
         StringBuilder encodedMSG = new StringBuilder();
 
         for(int i = 0; i < MSG.length(); i++) {
 
-            if((MSG.charAt(i) >= 97) && (MSG.charAt(i) <= 122)) {
-                int charPos = alphabet.indexOf(MSG.charAt(i));
+            if(((MSG.charAt(i) >= 97) && (MSG.charAt(i) <= 122)) || ((MSG.charAt(i) >= 65) && (MSG.charAt(i) <= 90))) {
 
-                int key = (offset + charPos) % 26;
+                if(Character.isUpperCase(MSG.charAt(i))) {
+                    int charPos = ALPHABET.indexOf(MSG.charAt(i));
 
-                char rep = alphabet.charAt(key);
+                    int key = (offset + charPos) % 26;
 
-                encodedMSG.append(rep);
+                    char rep = ALPHABET.charAt(key);
+
+                    encodedMSG.append(rep);
+                } else {
+                    int charPos = alphabet.indexOf(MSG.charAt(i));
+
+                    int key = (offset + charPos) % 26;
+
+                    char rep = alphabet.charAt(key);
+
+                    encodedMSG.append(rep);
+                }
             } else
                 encodedMSG.append(MSG.charAt(i));
         }
@@ -34,23 +47,35 @@ public class Cipher {
 
     public static String decipherMessage(String MSG, int offset) {
 
-        MSG = MSG.toLowerCase();
-
         StringBuilder decodedMSG = new StringBuilder();
 
         for(int i = 0; i < MSG.length(); i++) {
 
-            if((MSG.charAt(i) >= 97) && (MSG.charAt(i) <= 122)) {
-                int charPos = alphabet.indexOf(MSG.charAt(i));
+            if(((MSG.charAt(i) >= 97) && (MSG.charAt(i) <= 122)) || ((MSG.charAt(i) >= 65) && (MSG.charAt(i) <= 90))) {
 
-                int key = (charPos - offset) % 26;
+                if(Character.isUpperCase(MSG.charAt(i))) {
+                    int charPos = ALPHABET.indexOf(MSG.charAt(i));
 
-                if(key < 0)
-                    key = alphabet.length() + key;
+                    int key = (charPos - offset) % 26;
 
-                char rep = alphabet.charAt(key);
+                    if(key < 0)
+                        key = ALPHABET.length() + key;
 
-                decodedMSG.append(rep);
+                    char rep = ALPHABET.charAt(key);
+
+                    decodedMSG.append(rep);
+                } else {
+                    int charPos = alphabet.indexOf(MSG.charAt(i));
+
+                    int key = (charPos - offset) % 26;
+
+                    if(key < 0)
+                        key = alphabet.length() + key;
+
+                    char rep = alphabet.charAt(key);
+
+                    decodedMSG.append(rep);
+                }
             } else
                 decodedMSG.append(MSG.charAt(i));
         }

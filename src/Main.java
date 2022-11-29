@@ -19,6 +19,7 @@ public class Main {
     static ArrayList<String> userRawContactsList = new ArrayList<>();
     static ArrayList<String> inboxPaths = new ArrayList<>();
     static ArrayList<String> rawInboxMSGs = new ArrayList<>();
+    static ArrayList<Message> inbox = new ArrayList<>();
     static ArrayList<User> users = new ArrayList<>();
     static User activeUser = null;
     static User activeRecipient = null;
@@ -177,6 +178,33 @@ public class Main {
             File currFile = new File(inboxPaths.get(i));
             if(ReadFiles.getFileInfo(currFile)) {
                 rawInboxMSGs.add(ReadFiles.readFileToString(currFile));
+
+                String message = rawInboxMSGs.get(i).substring(0, rawInboxMSGs.get(i).indexOf("["));
+                rawInboxMSGs.set(i, rawInboxMSGs.get(i).substring(rawInboxMSGs.get(i).indexOf("[") + 1));
+
+                String sender = rawInboxMSGs.get(i).substring(0, rawInboxMSGs.get(i).indexOf("]"));
+                rawInboxMSGs.set(i, rawInboxMSGs.get(i).substring(rawInboxMSGs.get(i).indexOf("]") + 2));
+
+                String recipient = rawInboxMSGs.get(i);
+                recipient = recipient.replace("]", "");
+
+                int senderIndex;
+                for(int j = 0; j < users.size(); i++) {
+                    if(users.get(j).getUserName().equals(sender)) {
+                        senderIndex = j;
+                        break;
+                    }
+                }
+
+                int recipientIndex;
+                for(int j = 0; j < users.size(); i++) {
+                    if(users.get(j).getUserName().equals(recipient)) {
+                        recipientIndex = j;
+                        break;
+                    }
+                }
+
+                //inbox.add(new Message(users.get()));
             }
         }
     }
@@ -194,6 +222,6 @@ public class Main {
      */
     public static void readMessage(String path) {
 
-        new Message(path);
+
     }
 }

@@ -32,7 +32,7 @@ public class UserInput {
         return sc.next();
     }
 
-    public static int getContactSelection(ArrayList<String> contacts) {
+    public static int getContactSelection(ArrayList<User> contacts) {
         int num;
         do {
             System.out.print("\nPlease select Contact! (Input 1, 2, 3, 4, etc.): ");
@@ -46,6 +46,10 @@ public class UserInput {
                 System.out.println("Invalid input!");
         } while(num < 1 || num > contacts.size());
         return num - 1;
+    }
+
+    public static int getInboxSelection(ArrayList<Message> inbox) {
+        return 0;
     }
 
     public static char getListInput(String input) {

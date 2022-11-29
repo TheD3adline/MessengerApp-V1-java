@@ -14,12 +14,12 @@ public class Message {
     private User recipient;
     private String message;
 
-    public Message(User sender, User recipient, String message) {
+    public Message(User sender, User recipient, String message, int offset) {
         this.sender = sender;
         this.recipient = recipient;
         this.message = message;
         if(WriteFiles.createFile("cache\\mail" + recipient.getUserName().toUpperCase() + ".txt")) {
-            if(WriteFiles.writeDataToFile("cache\\mail" + recipient.getUserName().toUpperCase() + ".txt", Cipher.cipherMessage(message, 4)))
+            if(WriteFiles.writeDataToFile("cache\\mail" + recipient.getUserName().toUpperCase() + ".txt", Cipher.cipherMessage(message, offset)))
                 System.out.println("Message to " + recipient.getUserName() + " sent successfully.");
             else {
                 System.out.println("Unknown Error during message delivery.");
@@ -28,10 +28,10 @@ public class Message {
         }
     }
 
-    public Message(String path, int cipher) {
+    public Message(String path) {
         File msgFile = new File(path);
         if(ReadFiles.getFileInfo(msgFile)) {
-            this.message = Cipher.decipherMessage(ReadFiles.readFileToString(msgFile), cipher);
+            this.message = Cipher.decipherMessage(ReadFiles.readFileToString(msgFile));
             System.out.println(message);
             //WriteFiles.deleteFile(path);
         }

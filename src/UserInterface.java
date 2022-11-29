@@ -121,7 +121,7 @@ public class UserInterface {
 
     public static void selectRecipient() {
         for(int i = 0; i < Main.activeUser.getContactList().size(); i++) {
-            System.out.println((i + 1) + ".)" + Main.activeUser.getContactList().get(i));
+            System.out.println((i + 1) + ".)" + Main.activeUser.getContactList().get(i).getUserName());
         }
     }
 
@@ -132,16 +132,5 @@ public class UserInterface {
     public static void sentMSG() {
         System.out.print("\n Your message was sent!");
         //to Message.recipient.getUserName()
-    }
-
-    public static ArrayList<String> selectMSG() {
-        System.out.println("\nPlease select message or x to return! (Input 1, 2, 3, 4 etc., or x): ");
-        ArrayList<String> inboxList;
-        inboxList = ReadFiles.listFilesFromFolder(Main.cacheFolder);
-        for(int i = 0; i < inboxList.size(); i++) {
-            inboxList.set(i, inboxList.get(i).replace("cache\\", (i + 1) + ".) "));
-            System.out.println(inboxList.get(i));
-        }
-        return inboxList;
     }
 }

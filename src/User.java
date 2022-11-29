@@ -11,12 +11,11 @@ import java.util.ArrayList;
 public class User {
     private String userName;
     private String userPass;
-    private ArrayList<String> contactList;
+    private ArrayList<User> contactList;
 
-    public User(String userName, String userPass, ArrayList<String> contactList) {
+    public User(String userName, String userPass) {
         this.userName = userName;
         this.userPass = userPass;
-        this.contactList = contactList;
     }
 
     public String getUserName() {
@@ -35,11 +34,11 @@ public class User {
         this.userPass = userPass;
     }
 
-    public ArrayList<String> getContactList() {
+    public ArrayList<User> getContactList() {
         return contactList;
     }
 
-    public void setContactList(ArrayList<String> contactList) {
+    public void setContactList(ArrayList<User> contactList) {
         this.contactList = contactList;
     }
 }

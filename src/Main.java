@@ -17,6 +17,8 @@ public class Main {
     static ArrayList<String> userNamesList = new ArrayList<>();
     static ArrayList<String> userPassList = new ArrayList<>();
     static ArrayList<String> userRawContactsList = new ArrayList<>();
+    static ArrayList<String> inboxPaths = new ArrayList<>();
+    static ArrayList<String> rawInboxMSGs = new ArrayList<>();
     static ArrayList<User> users = new ArrayList<>();
     static User activeUser = null;
     static User activeRecipient = null;
@@ -28,6 +30,7 @@ public class Main {
 
         getUserData();
         loadUserData();
+        loadInbox();
 
 
         UserInterface.printMainUI();
@@ -81,12 +84,9 @@ public class Main {
                 case 1:
                     newMSGMenu(); break;
                 case 2:
-                    ArrayList<String> inboxList = UserInterface.selectMSG();
-                    StringBuilder path = new StringBuilder(inboxList.get(UserInput.getContactSelection(inboxList)));
-                    for(int i = 0; i < 4; i++) {
-                        path.deleteCharAt(0);
-                    }
-                    readMessage("cache\\" + path);
+
+
+                    // continue here, method to create inbox ArrayList<Message> from cache folder.
                     break;
                 case 3:
                     UserInterface.printMainUI();
@@ -106,17 +106,8 @@ public class Main {
                     System.out.println("Create New Contact PLACEHOLDER"); break;
                 case 2:
                     UserInterface.selectRecipient();
-                    String selector = activeUser.getContactList().get(UserInput.getContactSelection(activeUser.getContactList()));
-                    for(int i = 0; i < users.size(); i++) {
-                        if(selector.equals(users.get(i).getUserName())) {
-                            activeRecipient = users.get(i);
-                            writeMessage();
-                            break;
-                        }
-                        if(i == (users.size() - 1)) {
-                            System.out.println("Error, Contact could not be found!");
-                        }
-                    }
+                    activeRecipient = activeUser.getContactList().get(UserInput.getContactSelection(activeUser.getContactList()));
+                    writeMessage();
                     activeRecipient = null;
                     break;
                 case 3:
@@ -146,10 +137,11 @@ public class Main {
 
             userRawContactsList.add(rawUserList.get(i));
 
-            users.add(new User(userNamesList.get(i), userPassList.get(i), makeContactList(userRawContactsList.get(i))));
+            users.add(new User(userNamesList.get(i), userPassList.get(i)));
         }
-
-
+        for(int i = 0; i < users.size(); i++) {
+            users.get(i).setContactList(loadContactData(i));
+        }
     }
 
     /**
@@ -164,16 +156,29 @@ public class Main {
 
     /**
      * Splices the contact data of the users from the given Strings.
-     * @param contacts given String.
      * @return ArrayList that stores contact data for each user individually.
      */
-    public static ArrayList<String> makeContactList(String contacts) {
-        ArrayList<String> data = new ArrayList<>();
-        while(contacts.charAt(0) != ';') {
-            data.add(contacts.substring(0, contacts.indexOf(',')));
-            contacts = contacts.substring(contacts.indexOf(',') + 1);
+    public static ArrayList<User> loadContactData(int index) {
+        ArrayList<User> contacts = new ArrayList<>();
+        while(userRawContactsList.get(index).charAt(0) != ';') {
+            String temp = userRawContactsList.get(index).substring(0, userRawContactsList.get(index).indexOf(','));
+            userRawContactsList.set(index, userRawContactsList.get(index).substring(userRawContactsList.get(index).indexOf(',') + 1));
+            for(int i = 0; i < users.size(); i++) {
+                if(users.get(i).getUserName().equals(temp)) {
+                    contacts.add(users.get(i));
+                }
+            }
         }
-        return data;
+        return contacts;
+    }
+    public static void loadInbox() {
+        inboxPaths = ReadFiles.listFilesFromFolder(cacheFolder);
+        for(int i = 0; i < inboxPaths.size(); i++) {
+            File currFile = new File(inboxPaths.get(i));
+            if(ReadFiles.getFileInfo(currFile)) {
+                rawInboxMSGs.add(ReadFiles.readFileToString(currFile));
+            }
+        }
     }
 
     /**
@@ -181,15 +186,14 @@ public class Main {
      */
     public static void writeMessage() {
         System.out.print("Enter your message: ");
-        new Message(activeUser, activeRecipient, sc.nextLine());
+        new Message(activeUser, activeRecipient, sc.nextLine(), 4);
     }
 
     /**
      * Instantiates message to be read from specified path.
-     * @param path the specified path to where the message file is stored.
      */
     public static void readMessage(String path) {
-        System.out.println("Select message to read: ");
-        new Message(path, 4);
+
+        new Message(path);
     }
 }

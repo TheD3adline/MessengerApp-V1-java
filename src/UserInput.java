@@ -6,7 +6,6 @@
             Methods for the different types of user inputs with validity verification and loops.
  */
 
-import java.util.ArrayList;
 import java.util.Scanner;
 public class UserInput {
 
@@ -32,32 +31,35 @@ public class UserInput {
         return sc.next();
     }
 
-    public static int getContactSelection(ArrayList<User> contacts) {
+    public static int getListSelection(int listSize) {
         int num;
         do {
-            System.out.print("\nPlease select Contact! (Input 1, 2, 3, 4, etc.): ");
+            System.out.print("\nPlease select Entry! (Input 1, 2, 3, 4, etc.): ");
             while(!sc.hasNextInt()) {
                 sc.next();
                 System.out.println("Invalid input!");
-                System.out.print("\nPlease select Contact! (Input 1, 2, 3, 4, etc.): ");
+                System.out.print("\nPlease select Entry! (Input 1, 2, 3, 4, etc.): ");
             }
             num = sc.nextInt();
-            if(num < 1 || num > contacts.size())
+            if(num < 1 || num > listSize)
                 System.out.println("Invalid input!");
-        } while(num < 1 || num > contacts.size());
+        } while(num < 1 || num > listSize);
         return num - 1;
     }
 
-    public static int getInboxSelection(ArrayList<Message> inbox) {
-        return 0;
-    }
-
-    public static char getListInput(String input) {
-        if(Character.toLowerCase(input.charAt(0)) == 'x') {
-            return 'x';
-        } else if(Character.isDigit(input.charAt(0))) {
-            return input.charAt(0);
-        }
-        return ' ';
+    public static int getCipherOffset() {
+        int num;
+        do {
+            System.out.print("\nPlease enter offset for the cipher (1 - 26): ");
+            while(!sc.hasNextInt()) {
+                sc.next();
+                System.out.println("Invalid input!");
+                System.out.print("\nPlease enter offset for the cipher (1 - 26): ");
+            }
+            num = sc.nextInt();
+            if(num < 1 || num > 26)
+                System.out.println("Invalid input!");
+        } while(num < 1 || num > 26);
+        return num;
     }
 }

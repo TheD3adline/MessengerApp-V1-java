@@ -27,17 +27,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
         getUserData();
         loadUserData();
-        loadInbox();
-
-
         UserInterface.printMainUI();
         UserInterface.welcomeNote();
         while(true) {
-            switch(UserInput.getMenuInput()) {
+            switch(UserInput.getMenuInput()) {          //main method includes looped main menu
                     case 1:
                         System.out.println("PLACEHOLDER"); break;
                     case 2:
@@ -50,6 +45,9 @@ public class Main {
         }
     }
 
+    /**
+     * UI menu for login function.
+     */
     public static void loginMenu() {
         UserInterface.printLoginUI();
         while(true) {
@@ -78,19 +76,25 @@ public class Main {
         }
     }
 
+    /**
+     * UI menu for the user, can go to newMSGMenu, Inbox, or logout to previous login menu.
+     */
     public static void userMenu() {
+        loadInbox();
         UserInterface.printUserUI();
         while(true) {
             switch(UserInput.getMenuInput()) {
                 case 1:
                     newMSGMenu(); break;
                 case 2:
-
-
-                    // continue here, method to create inbox ArrayList<Message> from cache folder.
+                    UserInterface.printInboxMenu();
+                    UserInterface.printInbox(inbox);
+                    readMessage();
+                    UserInterface.printUserUI();
                     break;
                 case 3:
                     UserInterface.printMainUI();
+                    clearInbox();
                     activeUser = null;
                     return;
                 default:
@@ -99,6 +103,9 @@ public class Main {
         }
     }
 
+    /**
+     * UI menu for writing a new message, can select contact data from user's stored contacts.
+     */
     public static void newMSGMenu() {
         UserInterface.printNewMSGUI();
         while(true) {
@@ -107,7 +114,7 @@ public class Main {
                     System.out.println("Create New Contact PLACEHOLDER"); break;
                 case 2:
                     UserInterface.selectRecipient();
-                    activeRecipient = activeUser.getContactList().get(UserInput.getContactSelection(activeUser.getContactList()));
+                    activeRecipient = activeUser.getContactList().get(UserInput.getListSelection(activeUser.getContactList().size()));
                     writeMessage();
                     activeRecipient = null;
                     break;
@@ -172,6 +179,10 @@ public class Main {
         }
         return contacts;
     }
+
+    /**
+     * Reads files from inbox cache folder and loads their data into several lists to be processed into actual Message objects
+     */
     public static void loadInbox() {
         inboxPaths = ReadFiles.listFilesFromFolder(cacheFolder);
         for(int i = 0; i < inboxPaths.size(); i++) {
@@ -188,40 +199,43 @@ public class Main {
                 String recipient = rawInboxMSGs.get(i);
                 recipient = recipient.replace("]", "");
 
-                int senderIndex;
-                for(int j = 0; j < users.size(); i++) {
+                for(int j = 0; j < users.size(); j++) {
                     if(users.get(j).getUserName().equals(sender)) {
-                        senderIndex = j;
-                        break;
+                        for(int k = 0; k < users.size(); k++) {
+                            if(users.get(k).getUserName().equals(recipient)) {
+                                inbox.add(new Message(users.get(j), users.get(k), message, inboxPaths.get(i)));
+                            }
+                        }
                     }
                 }
-
-                int recipientIndex;
-                for(int j = 0; j < users.size(); i++) {
-                    if(users.get(j).getUserName().equals(recipient)) {
-                        recipientIndex = j;
-                        break;
-                    }
-                }
-
-                //inbox.add(new Message(users.get()));
             }
         }
     }
 
     /**
-     * Instantiates a new message with all the relevant data, sender, recipient, and a query for the actual message.
+     * Clears all lists that are involved with reading the message cache folder.
      */
-    public static void writeMessage() {
-        System.out.print("Enter your message: ");
-        new Message(activeUser, activeRecipient, sc.nextLine(), 4);
+    public static void clearInbox() {
+        inboxPaths.clear();
+        rawInboxMSGs.clear();
+        inbox.clear();
     }
 
     /**
-     * Instantiates message to be read from specified path.
+     * Instantiates a new message with all the relevant data, sender, recipient, a query for the actual message and the
+     * desired offset for the cipher.
      */
-    public static void readMessage(String path) {
+    public static void writeMessage() {
+        System.out.print("Enter your message: ");
+        new Message(activeUser, activeRecipient, sc.nextLine(), UserInput.getCipherOffset());
+    }
 
-
+    /**
+     * Asks the user to select stored message from inbox, then asks for the cipher offset to decrypt the message.
+     */
+    public static void readMessage() {
+        System.out.println("\nPlease enter the Cipher offset (1 - 26) ");
+        System.out.println("\nThe deciphered message is: \n" +
+                Cipher.decipherMessage(inbox.get(UserInput.getListSelection(inbox.size())).getMessage(), UserInput.getCipherOffset()));
     }
 }

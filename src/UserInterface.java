@@ -24,7 +24,6 @@ public class UserInterface {
     private static final String newContactPoint = "1.) Create new Contact (PH)";
     private static final String selectRecipientPoint = "2.) Select Recipient";
     private static final String backToUserMenu = "3.) Back to User Menu";
-    private static final String backToUserMenuX = "X.) Back to User Menu";
     private static final String inboxUI = "Inbox Menu";
 
     public static void printMainUI() {
@@ -75,11 +74,16 @@ public class UserInterface {
         System.out.println("-".repeat(40));
         System.out.println("|" + " ".repeat(38) + "|");
         System.out.println("|" + " ".repeat(4) + inboxUI + " ".repeat((34 - inboxUI.length())) + "|");
-        System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("|" + " ".repeat(38) + "|");
-        System.out.println("|" + " ".repeat(4) + backToUserMenuX + " ".repeat((34 - backToUserMenuX.length())) + "|");
-        System.out.println("|" + " ".repeat(38) + "|");
+        for (int i = 0; i < 4; i++) {
+            System.out.println("|" + " ".repeat(38) + "|");
+        }
         System.out.print("-".repeat(40));
+    }
+
+    public static void printInbox(ArrayList<Message> inbox) {
+        for(int i = 0; i < inbox.size(); i++) {
+            System.out.print("\n" + (i + 1) + ".) " + inbox.get(i).getPath().substring(6));
+        }
     }
 
 
@@ -107,30 +111,9 @@ public class UserInterface {
         System.out.print("\nLogin Successful. Welcome back " + Main.activeUser.getUserName() + " !\n");
     }
 
-    public static void newMSG() {
-        System.out.print("\nYou have new messages in your inbox!");
-    }
-
-    public static void noMSG() {
-        System.out.print("\nYou have no new messages.");
-    }
-
-    public static void enterNewContact() {
-        System.out.print("\nEnter new Contact: ");
-    }
-
     public static void selectRecipient() {
         for(int i = 0; i < Main.activeUser.getContactList().size(); i++) {
             System.out.println((i + 1) + ".)" + Main.activeUser.getContactList().get(i).getUserName());
         }
-    }
-
-    public static void enterMSG() {
-        System.out.print("\nEnter your message: ");
-    }
-
-    public static void sentMSG() {
-        System.out.print("\n Your message was sent!");
-        //to Message.recipient.getUserName()
     }
 }

@@ -11,6 +11,12 @@ public class Cipher {
     private static final String alphabet = "abcdefghijklmnopqrstuvwxyz";
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+    /**
+     * to encode messages from given String.
+     * @param MSG
+     * @param offset
+     * @return
+     */
     public static String cipherMessage(String MSG, int offset) {
 
         MSG = MSG.replace("[", "(");

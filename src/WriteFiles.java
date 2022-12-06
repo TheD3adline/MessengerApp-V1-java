@@ -70,6 +70,11 @@ public class WriteFiles {
         return false;
     }
 
+    /**
+     * Deletes file from given path.
+     * @param path given file to delete.
+     * @return boolean if file deletion successful or not.
+     */
     public static boolean deleteFile(String path) {
         try {
             File f = new File(path);

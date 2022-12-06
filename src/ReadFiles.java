@@ -77,6 +77,11 @@ public class ReadFiles {
         return "";
     }
 
+    /**
+     * Puts all paths to files found in given path to return value ArrayList.
+     * @param folder given file/path.
+     * @return the ArrayList with all paths to files from given path.
+     */
     public static ArrayList<String> listFilesFromFolder(File folder) {
         ArrayList<String> r = new ArrayList<>();
         for(File fileEntry : Objects.requireNonNull(folder.listFiles())) {

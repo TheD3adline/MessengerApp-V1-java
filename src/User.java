@@ -13,6 +13,11 @@ public class User {
     private String userPass;
     private ArrayList<User> contactList;
 
+    /**
+     * constructor for user instantiation
+     * @param userName given username
+     * @param userPass given password
+     */
     public User(String userName, String userPass) {
         this.userName = userName;
         this.userPass = userPass;
@@ -22,22 +27,18 @@ public class User {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getUserPass() {
         return userPass;
-    }
-
-    public void setUserPass(String userPass) {
-        this.userPass = userPass;
     }
 
     public ArrayList<User> getContactList() {
         return contactList;
     }
 
+    /**
+     * sets the contact list for the individual user
+     * @param contactList given contact list
+     */
     public void setContactList(ArrayList<User> contactList) {
         this.contactList = contactList;
     }

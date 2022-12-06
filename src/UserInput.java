@@ -11,6 +11,10 @@ public class UserInput {
 
     static Scanner sc = new Scanner(System.in);
 
+    /**
+     * looped input validation for integer data types and menu points
+     * @return integer from verified input
+     */
     public static int getMenuInput() {
         int num;
         do {
@@ -27,10 +31,19 @@ public class UserInput {
         return num;
     }
 
+    /**
+     * simple String input
+     * @return String from input
+     */
     public static String getStringInput() {
         return sc.next();
     }
 
+    /**
+     * Very similar to getMenuInput, but uses given list size as constraints and returns int subtracted by 1 for list indices
+     * @param listSize given int for size of list
+     * @return int subtracted by 1 for program control via indices
+     */
     public static int getListSelection(int listSize) {
         int num;
         do {
@@ -47,6 +60,10 @@ public class UserInput {
         return num - 1;
     }
 
+    /**
+     * input validation to be used with the cipher, constraint is the size of the alphabet
+     * @return integer for cipher
+     */
     public static int getCipherOffset() {
         int num;
         do {

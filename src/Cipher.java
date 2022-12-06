@@ -13,9 +13,9 @@ public class Cipher {
 
     /**
      * to encode messages from given String.
-     * @param MSG
-     * @param offset
-     * @return
+     * @param MSG given String
+     * @param offset offset to change the characters against the alphabet
+     * @return the encrypted message as String
      */
     public static String cipherMessage(String MSG, int offset) {
 
@@ -24,19 +24,27 @@ public class Cipher {
 
         StringBuilder encodedMSG = new StringBuilder();
 
+        //loops through every character of the String
         for(int i = 0; i < MSG.length(); i++) {
 
+            //checks if current character is of valid data, the letters from the alphabet via ascii code.
             if(((MSG.charAt(i) >= 97) && (MSG.charAt(i) <= 122)) || ((MSG.charAt(i) >= 65) && (MSG.charAt(i) <= 90))) {
 
+                //checks if current character is uppercase to apply capital letters.
                 if(Character.isUpperCase(MSG.charAt(i))) {
-                    int charPos = ALPHABET.indexOf(MSG.charAt(i));
+                    int charPos = ALPHABET.indexOf(MSG.charAt(i)); //saves alphabet position of current MSG character as int
 
+                    //creates a "key" by adding the offset to charPos, % 26, so it can't be higher than 26 and switches
+                    //over to the letter a after having reached z.
                     int key = (offset + charPos) % 26;
 
+                    //saves the current encoded character by applying the key integer to the alphabet
                     char rep = ALPHABET.charAt(key);
 
+                    //StringBuilder appends the encoded character to the overall message that is to be returned
                     encodedMSG.append(rep);
                 } else {
+                    //same as above, just with non-capital letters
                     int charPos = alphabet.indexOf(MSG.charAt(i));
 
                     int key = (offset + charPos) % 26;
@@ -46,11 +54,19 @@ public class Cipher {
                     encodedMSG.append(rep);
                 }
             } else
+                //if current character is not part of the alphabet, like numbers or special characters or a space
+                //appends them without encryption.
                 encodedMSG.append(MSG.charAt(i));
         }
         return encodedMSG.toString();
     }
 
+    /**
+     * to decrypt the messages, functions the same as the encryption method, just the other way around the alphabet.
+     * @param MSG given message
+     * @param offset to switch the characters against the alphabet
+     * @return decrypted message
+     */
     public static String decipherMessage(String MSG, int offset) {
 
         StringBuilder decodedMSG = new StringBuilder();
@@ -62,6 +78,7 @@ public class Cipher {
                 if(Character.isUpperCase(MSG.charAt(i))) {
                     int charPos = ALPHABET.indexOf(MSG.charAt(i));
 
+                    //the only real difference to the encryption method is the way the key is calculated and applied
                     int key = (charPos - offset) % 26;
 
                     if(key < 0)

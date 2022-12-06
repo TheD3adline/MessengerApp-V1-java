@@ -26,6 +26,7 @@ public class UserInterface {
     private static final String backToUserMenu = "3.) Back to User Menu";
     private static final String inboxUI = "Inbox Menu";
 
+    //prints main UI to console
     public static void printMainUI() {
         System.out.println("-".repeat(40));
         System.out.println("|" + " ".repeat(38) + "|");
@@ -37,6 +38,7 @@ public class UserInterface {
         System.out.print("-".repeat(40));
     }
 
+    //prints login UI to console
     public static void printLoginUI() {
         System.out.println("-".repeat(40));
         System.out.println("|" + " ".repeat(38) + "|");
@@ -48,6 +50,7 @@ public class UserInterface {
         System.out.print("-".repeat(40));
     }
 
+    //prints user UI to console
     public static void printUserUI() {
         System.out.println("-".repeat(40));
         System.out.println("|" + " ".repeat(38) + "|");
@@ -59,6 +62,7 @@ public class UserInterface {
         System.out.print("-".repeat(40));
     }
 
+    //prints new message UI to console
     public static void printNewMSGUI() {
         System.out.println("-".repeat(40));
         System.out.println("|" + " ".repeat(38) + "|");
@@ -70,6 +74,7 @@ public class UserInterface {
         System.out.print("-".repeat(40));
     }
 
+    //prints inbox UI to console
     public static void printInboxMenu() {
         System.out.println("-".repeat(40));
         System.out.println("|" + " ".repeat(38) + "|");
@@ -80,13 +85,14 @@ public class UserInterface {
         System.out.print("-".repeat(40));
     }
 
+    //prints contents of the inbox to console
     public static void printInbox(ArrayList<Message> inbox) {
         for(int i = 0; i < inbox.size(); i++) {
             System.out.print("\n" + (i + 1) + ".) " + inbox.get(i).getPath().substring(6));
         }
     }
 
-
+    //several UI messages to the user that are used more frequently
     public static void welcomeNote() {
         System.out.println("\nWelcome to the Julius Caesar Messenger App (or short JCM)!");
     }
@@ -107,10 +113,12 @@ public class UserInterface {
         System.out.print("\nUsername or Password Incorrect!");
     }
 
+    //greets user with username upon valid login attempt
     public static void correctUserData() {
         System.out.print("\nLogin Successful. Welcome back " + Main.activeUser.getUserName() + " !\n");
     }
 
+    //prints current users contact list to console
     public static void selectRecipient() {
         for(int i = 0; i < Main.activeUser.getContactList().size(); i++) {
             System.out.println((i + 1) + ".)" + Main.activeUser.getContactList().get(i).getUserName());
